@@ -42,7 +42,6 @@ class RowChanger(SampleBase):
 
     def run(self):
         count = 0
-        help(self.matrix)
         m = len(self.rowPatterns)-1
         i=0
 
