@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 from samplebase import SampleBase
+import draw as DRAW
 import time
 
 class RowChanger(SampleBase):
@@ -22,23 +23,7 @@ class RowChanger(SampleBase):
                     [x for x in range(0,32) if x%6 ==0],
                     [x for x in range(0,32) if x%7 ==0],
                     [x for x in range(0,32) if x%8 ==0])
-        return patterns
-                    
-        
-    def DrawRow(self, rowIndex, r=255, g=255, b=255):
-        for x in range(0, self.width):
-            self.matrix.SetPixel(x, rowIndex, r, g, b)        
-        
-    def DrawColumn(self, colIndex, r=255, g=255, b=255):
-        for y in range(0, self.width):
-            self.matrix.SetPixel(colIndex, y, r, g, b)
-            
-    def DrawRows(self, rows, r=255, g=255, b=255):
-        """
-        rows is a list of integers, defining the row indices to draw
-        """
-        for row in rows:
-            self.DrawRow(row)
+        return patterns      
 
     def run(self):
         count = 0
@@ -49,7 +34,7 @@ class RowChanger(SampleBase):
             patternIndex = m - abs(i % (2*m) - m)
             rows = self.rowPatterns[patternIndex]
             self.matrix.Clear()
-            self.DrawRows(rows)
+            DRAW.DrawRows(self.matrix, rows)
             count += 1
             time.sleep(60.0/(self.bpm*4))
             i+=1

@@ -2,3 +2,7 @@
 *.a
 *~
 *.so
+.DS_Store
+adapter/.DS_Store
+bindings/.DS_Store
+bindings/python/.DS_Store
