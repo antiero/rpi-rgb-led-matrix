@@ -14,7 +14,7 @@ class MidiLines(SampleBase):
     def __init__(self, *args, **kwargs):
         self.width = 32
         self.height = 32
-        self.bpm = 120.0
+        self.bpm = 75.0
         self.midi_port = 1
         self.midi_offset_led = 65
         self.keys_held = []
@@ -39,15 +39,19 @@ class MidiLines(SampleBase):
                         note = int(message[1]) - self.midi_offset_led
                         velocity = int(message[2])
                         #print("[%s] @%0.6f %r" % (port_name, timer, message))
-                        print("Note: %d, Velocity: %d" % (note,velocity))
+                        #print("Note: %d, Velocity: %d" % (note,velocity))
                         if (velocity > 0):
                             self.matrix.Clear()
                             self.keys_held.append(note)
                             DRAW.DrawColumns(self.matrix, self.keys_held)
                         else:
-                            self.keys_held.remove(note)
+                            try:
+                                self.keys_held.remove(note)
+                            except:
+                                pass
 
-                time.sleep(60.0/(self.bpm*4))
+                #time.sleep(60.0/(self.bpm*4))
+                time.sleep(0.01)
         except KeyboardInterrupt:
             print('')
         finally:
